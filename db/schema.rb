@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20150917213646) do
   create_table "albums", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "album_type", null: false
-    t.integer  "artist",     null: false
+    t.integer  "band_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "albums", ["name", "artist"], name: "index_albums_on_name_and_artist", unique: true, using: :btree
+  add_index "albums", ["name", "band_id"], name: "index_albums_on_name_and_band_id", unique: true, using: :btree
   add_index "albums", ["name"], name: "index_albums_on_name", using: :btree
 
   create_table "bands", force: :cascade do |t|
@@ -39,12 +39,12 @@ ActiveRecord::Schema.define(version: 20150917213646) do
     t.string   "name",       null: false
     t.string   "track_type", null: false
     t.text     "lyrics",     null: false
-    t.integer  "album",      null: false
+    t.integer  "album_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "tracks", ["name", "album"], name: "index_tracks_on_name_and_album", unique: true, using: :btree
+  add_index "tracks", ["name", "album_id"], name: "index_tracks_on_name_and_album_id", unique: true, using: :btree
   add_index "tracks", ["name"], name: "index_tracks_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
