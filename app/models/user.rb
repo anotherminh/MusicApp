@@ -8,7 +8,6 @@
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#
 
 class User < ActiveRecord::Base
   attr_reader :password
@@ -24,7 +23,7 @@ class User < ActiveRecord::Base
     user = User.find_by_email(email)
     return user if user && user.is_password?(password)
   end
-  
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
@@ -35,12 +34,12 @@ class User < ActiveRecord::Base
   end
 
   def ensure_session_token
-    session_token ||= reset_session_token!
+    self.session_token ||= SecureRandom.base64
   end
 
   def reset_session_token!
     session_token = SecureRandom.base64
-    self.update(session_token: session_token)
+    self.update!(session_token: session_token)
     session_token
   end
 end
