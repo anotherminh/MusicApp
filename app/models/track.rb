@@ -12,7 +12,7 @@
 #
 
 class Track < ActiveRecord::Base
-  ACCEPTED_TRACK_TYPES = ["regular", "studio"]
+  ACCEPTED_TRACK_TYPES = ["regular", "bonus"]
   validates :name, :track_type, :lyrics, :album_id, presence: true
   validates :name, uniqueness: { scope: :album_id }
   validates :track_type, inclusion: ACCEPTED_TRACK_TYPES
